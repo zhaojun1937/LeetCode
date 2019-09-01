@@ -1,0 +1,44 @@
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        int ovl = 0;
+		ListNode* cur_l1 = l1;
+		ListNode* cur_l2 = l2;
+
+		ListNode* result = new ListNode(0);
+		ListNode* cur_result = result;
+		while(cur_l1 != NULL && cur_l2 != NULL)
+		{
+			cur_result->next = new ListNode((cur_l1->val + cur_l2->val + ovl)%10);
+			cur_result = cur_result->next;
+			ovl = (cur_l1->val + cur_l2->val + ovl)/10;
+			cur_l2 = cur_l2->next;
+			cur_l1 = cur_l1->next;
+		}
+		if(cur_l1 != NULL)
+		{
+			while(cur_l1 != NULL)
+			{
+				cur_result->next = new ListNode((cur_l1->val + ovl)%10);
+				cur_result = cur_result->next;
+				ovl = (cur_l1->val + ovl)/10;
+				cur_l1 = cur_l1->next;
+			}
+		}
+		if(cur_l2 != NULL)
+		{
+			while(cur_l2 != NULL)
+			{
+				cur_result->next = new ListNode((cur_l2->val + ovl)%10);
+				cur_result = cur_result->next;
+				ovl = (cur_l2->val + ovl)/10;
+				cur_l2 = cur_l2->next;
+			}
+		}
+        if(ovl != 0)
+		{
+			cur_result->next = new ListNode(ovl);
+		}
+		return result->next;
+    }
+};

@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if(s.length() == 0)
+        {
+            return 0;
+        }
+        const char* c_s = s.c_str();
+		 int s_length = s.length();
+		 int* result = new int[s_length];
+		 int max_length = 1;
+		 int start = -1;
+		 result[0] = 1;
+		 for(int i = 1;i<s_length;i++)
+		 {
+			start = in_string(c_s[i],c_s,start,i);
+			result[i] = i-start;
+			 if(result[i] > max_length)
+			 {
+				 max_length = result[i];
+			 }
+		 }
+		 return max_length;
+    }
+    
+	 static int in_string(char c,const char* str,int start,int end)
+	 {
+		 for(int i = start+1;i<end;i++)
+		 {
+			 if(c == str[i])
+				 return i;
+		 }
+		 return start;
+	 }
+};

@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        map<int,int> arr;
+		vector<int> result;
+		map<int,int>::iterator target_iterator;
+		for(int i=0;i<nums.size();i++)
+		{
+			arr.insert(pair<int,int>(nums[i],i));
+		}
+		for(int i=0;i<nums.size();i++)
+		{
+			target_iterator = arr.find(target - nums[i]);
+			if(target_iterator != arr.end() && target_iterator->second != i)
+			{
+				result.push_back(i);
+				result.push_back(target_iterator->second);
+                break;
+			}
+		}
+		return result;
+    }
+};
