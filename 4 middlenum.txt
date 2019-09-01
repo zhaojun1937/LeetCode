@@ -1,0 +1,78 @@
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        double result = 0.0;
+		 int nums1_size = nums1.size();
+		 int nums2_size = nums2.size();
+		 if(nums1_size == 0 && nums2_size != 0)
+		 {
+			 if(nums2_size%2 == 0)
+			 {
+				 result = (nums2[nums2_size/2] + nums2[nums2_size/2-1])/2.0;
+			 }
+			 else
+			 {
+				 result = nums2[nums2_size/2]*1.0;
+			 }
+		 }
+		 else if(nums2_size == 0 && nums1_size != 0)
+		 {
+			  if(nums1_size%2 == 0)
+			 {
+				 result = (nums1[nums1_size/2] + nums1[nums1_size/2-1])/2.0;
+			 }
+			 else
+			 {
+				 result = nums1[nums1_size/2]*1.0;
+			 }
+		 }
+		 else
+		 {
+			 vector<int> tmp;
+			 vector<int>::iterator it1 = nums1.begin();
+			 vector<int>::iterator it2 = nums2.begin();
+			 while(it1 != nums1.end() && it2 != nums2.end())
+			 {
+				 if(*it1 <= *it2)
+				 {
+					 tmp.push_back(*it1);
+					 it1++;
+				 }
+				 else
+				 {
+					 tmp.push_back(*it2);
+					 it2++;
+				 }
+			 }
+			 if(it1 != nums1.end())
+			 {
+				 while(it1 != nums1.end())
+				 {
+					 tmp.push_back(*it1);
+					 it1++;
+				 }
+			 }
+			 if(it2 != nums2.end())
+			 {
+				  
+                 while(it2 != nums2.end())
+				 {
+					 tmp.push_back(*it2);
+					 it2++;
+				 }
+			 }
+			 int tmp_size = tmp.size();
+			 if(tmp_size%2 == 0)
+			 {
+				 result = (tmp[tmp_size/2] + tmp[tmp_size/2-1])/2.0;
+			 }
+			 else
+			 {
+				 result = tmp[tmp_size/2]*1.0;
+			 }
+
+		 }
+		 
+		 return result;
+    }
+};
